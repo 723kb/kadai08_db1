@@ -8,14 +8,16 @@
     <!-- font-awesome 読み込み -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Fonts 読み込み -->
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-[#B5D9DB] flex flex-col justify-center items-center">
+<body class="bg-[#B5D9DB] flex flex-col justify-center items-center font-m-plus-1">
 
     <!-- Header[Start] -->
     <header class="w-screen h-28 bg-[#B5D9DB] flex justify-center items-center">
-        <h1 class="text-center">なんでも掲示板</h1>
+        <h1 class="text-center font-mochiy-pop-one">なんでも掲示板</h1>
     </header>
     <!-- Header[End] -->
 
@@ -66,7 +68,7 @@
 
         <!-- Display area[Start] -->
         <div class="w-full m-4">
-            <h2 class="text-center mb-4">投稿一覧</h2>
+            <h2 class="text-center mb-4 font-mochiy-pop-one">投稿一覧</h2>
             <!-- ソートボタン -->
             <div class="w-1/2 flex justify-around mx-auto">
                 <button type="button" name="order" id="ascButton" value="asc" class="w-1/5 border border-slate-200 rounded-md hover:bg-[#FFC4C4] p-2 m-2">
@@ -174,7 +176,7 @@
 
     <!-- Footer[Start] -->
     <footer class="w-screen h-28 bg-[#B5D9DB] flex justify-center items-center">
-        <h1 class="text-center">2024©なっちゃん</h1>
+        <h1 class="text-center font-mochiy-pop-one">2024©なっちゃん</h1>
     </footer>
     <!-- Footer[End] -->
 

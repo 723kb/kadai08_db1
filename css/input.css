@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* カスタムのフォント設定 */
+.custom-font {
+  font-family: 'M PLUS 1 Code', 'Mochiy Pop One', sans-serif;
+}
