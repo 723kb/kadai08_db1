@@ -118,18 +118,18 @@ document.querySelectorAll('.picture-modal-trigger').forEach(trigger => {
 
     // 新しいdiv要素を作成し、クラスとスタイルを設定
     const modalDiv = document.createElement('div');
-    modalDiv.classList.add('border', 'rounded-md', 'overflow-hidden', 'w-full', 'h-auto', 'picture-modal-trigger');
+    modalDiv.classList.add('rounded-md', 'overflow-hidden', 'w-full', 'h-auto', 'picture-modal-trigger');
     modalDiv.style.position = 'fixed';
     modalDiv.style.top = '50%';
     modalDiv.style.left = '50%';
     modalDiv.style.transform = 'translate(-50%, -50%)';
     modalDiv.style.zIndex = '9999';
     modalDiv.innerHTML = `
-      <div class="modal-content relative w-full max-w-screen-md max-h-screen-md mx-auto">
-          <span class="close absolute top-2 right-2 cursor-pointer text-2xl">&times;</span>
-          <img src="${imgSrc}" alt="写真" class="w-full h-auto max-h-full object-contain">
+      <div class="modal-content relative w-full max-w-screen-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+        <span class="close absolute top-3 right-3 cursor-pointer w-10 h-10 flex items-center justify-center rounded-md text-2xl leading-none bg-gray-800  text-white hover:bg-white hover:text-gray-600">&times;</span>
+        <img src="${imgSrc}" alt="写真" class="w-full h-auto max-w-full max-h-[80vh] object-contain p-4">
       </div>
-  `;
+    `;
 
     // モーダルをページに追加
     document.body.appendChild(modalDiv);

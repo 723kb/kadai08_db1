@@ -5,17 +5,17 @@
   <form method="POST" action="index.php" enctype="multipart/form-data" id="myForm" class="w-full flex flex-col justify-center items-center m-2">
     <div class="w-full flex flex-col justify-center m-2">
       <div class="p-4">
-        <label for="name">名前：</label>
+        <label for="name" class="text-sm sm:text-base md:text-lg lg:text-xl">名前：</label>
         <input type="text" name="name" id="name" placeholder="テストちゃん" class="w-full h-11 p-2 border rounded-md">
       </div>
       <div class="p-4">
-        <label for="message">内容：</label>
+        <label for="message" class="text-sm sm:text-base md:text-lg lg:text-xl">内容：</label>
         <textArea name="message" id="message" placeholder="140字以内で内容を入力してください。" rows="4" cols="40" class="w-full p-2 border rounded-md"></textArea>
         <div id="messageError" class="text-red-500 text-lg mt-1 hidden">内容は140文字以内で入力してください</div>
       </div>
       <div class="pb-4 px-4">
-        <label for="picture">写真：</label>
-        <div class="flex justify-center items-center">
+        <label for="picture" class="text-sm sm:text-base md:text-lg lg:text-xl">写真：</label>
+        <div class="flex flex-col sm:flex-row justify-center items-center">
           <input type="file" name="picture" id="picture" accept="image/*" onchange="previewFile()" class="w-full h-11 py-2 my-2">
           <!-- accept="image/*" 画像ファイルのみを許可 -->
           <button type="submit" class="w-1/6 border border-slate-200 hover:bg-[#93CCCA] rounded-md p-2 my-2"><i class="fas fa-paper-plane"></i></button>
@@ -31,7 +31,7 @@
   <!-- Search area[Start] -->
   <form method="GET" action="" class="w-full flex flex-row justify-around items-center border m-2">
     <div class="w-2/3 p-4">
-      <label for="search">内容検索:</label>
+      <label for="search" class="text-sm sm:text-base md:text-lg lg:text-xl">内容検索:</label>
       <input type="text" name="search" placeholder="キーワードで内容を検索" class="w-full h-11 p-2 border rounded-md" id="search" value="<?= htmlspecialchars(isset($_GET['search']) ? $_GET['search'] : '', ENT_QUOTES) ?>">
     </div>
     <div class="w-1/3 flex justify-around items-end pt-4">
@@ -45,15 +45,17 @@
 
   <!-- Display area[Start] -->
   <div class="w-full m-4">
-    <h2 class="text-center mb-4 font-mochiy-pop-one">投稿一覧</h2>
+    <h2 class="text-md sm:text-lg md:text-xl lg:text-2xl text-center mb-4 font-mochiy-pop-one">Posts</h2>
     <!-- ソートボタン -->
     <div class="w-1/2 flex justify-around mx-auto">
       <button type="button" name="order" id="ascButton" value="asc" class="w-1/5 border border-slate-200 rounded-md hover:bg-[#FFC4C4] p-2 m-2">
-        <i class="fas fa-sort-amount-up"></i> 昇順 </button>
+        <i class="fas fa-sort-amount-up"></i>
+      </button>
       <button type="button" name="order" id="descButton" value="desc" class="w-1/5 border border-slate-200 rounded-md hover:bg-[#AAC4FF] p-2 m-2">
-        <i class="fas fa-sort-amount-down"></i> 降順 </button>
+        <i class="fas fa-sort-amount-down"></i>
+      </button>
     </div>
-    <div class="grid grid-cols-3 gap-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
       <?php
       require_once('funcs.php');
 
@@ -127,11 +129,11 @@
       // 検索結果の表示
       foreach ($results as $row) {
         echo '<div class="border rounded-md p-2 m-2 bg-white flex flex-col">';
-        echo '<p><strong>名前：</strong>' . h($row['name']) . '</p>';
-        echo '<p><strong>内容：</strong>' . nl2br(h($row['message'])) . '</p>';
+        echo '<p class="text-sm sm:text-base lg:text-lg"><strong class="text-base sm:text-lg lg:text-xl">名前：</strong>' . h($row['name']) . '</p>';
+        echo '<p class="text-sm sm:text-base lg:text-lg mt-2"><strong class="text-base sm:text-lg lg:text-xl">内容：</strong>' . nl2br(h($row['message'])) . '</p>';
 
         // 写真部分にクラスとデータ属性を設定
-        echo '<div class="border rounded-md overflow-hidden w-full h-auto picture-modal-trigger"';
+        echo '<div class="rounded-md overflow-hidden w-full h-auto max-w-full max-h-96 picture-modal-trigger"';
         if (!empty($row['picture'])) {
           echo ' data-img-src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '"'; // モーダルに表示する画像データ
         }
@@ -139,10 +141,10 @@
 
         // pictureが空でなければbase64エンコードされた画像データを表示
         if (!empty($row['picture'])) {
-          echo '<img src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '" alt="写真" class="w-full h-auto">';
+          echo '<img src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '" alt="写真" class="w-full h-auto max-w-full max-h-[90vh] object-contain">';
         }
         echo '</div>';
-        echo '<p class="mt-auto"><strong>日付：</strong>' . h($row['date']) . '</p>';
+        echo '<p class="mt-auto text-sm sm:text-base lg:text-lg"><strong class="text-base sm:text-lg lg:text-xl">日付：</strong>' . h($row['date']) . '</p>';
         echo '</div>';
       }
 

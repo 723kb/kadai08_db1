@@ -21,7 +21,7 @@
 <body class="bg-[#B5D9DB] flex flex-col justify-center items-center font-m-plus-1">
 
   <!-- Header[Start] -->
-  <header class="w-screen h-28 bg-[#B5D9DB] flex justify-center items-center">
-    <h1 class="text-center font-mochiy-pop-one">EchoBoard</h1>
+  <header class="w-screen h-20 sm:h-24 md:h-28 bg-[#B5D9DB] flex justify-center items-center">
+    <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-mochiy-pop-one">EchoBoard</h1>
   </header>
   <!-- Header[End] -->
