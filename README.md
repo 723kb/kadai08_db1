@@ -8,7 +8,7 @@ kadai08_db1
 
 ## ③DEMO
 
-デプロイしている場合はURLを記入（任意）
+https://723kb.sakura.ne.jp/kadai08_db1/
 
 ## ④作ったアプリケーション用のIDまたはPasswordがある場合
 

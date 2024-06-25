@@ -59,7 +59,7 @@
 
       // DB接続
       try {
-        $pdo = new PDO('mysql:dbname=gs_board;charset=utf8;host=localhost', 'root', '');
+        $pdo = new PDO($dsn, $user, $password);
       } catch (PDOException $e) {
         exit('DBConnectError:' . $e->getMessage());
       }

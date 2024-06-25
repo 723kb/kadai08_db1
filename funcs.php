@@ -5,3 +5,9 @@ function h($str)
 {
   return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
+
+$host = "";
+$dbName = "";
+$user = "";
+$password = "";
+$dsn = "mysql:host={$host};dbname={$dbName};charser=utf8";
