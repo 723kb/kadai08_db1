@@ -37,8 +37,38 @@ messageTextarea.addEventListener('input', function () {
 // 検索欄をクリアする処理
 function clearSearch() {
   document.getElementById('search').value = '';
-  window.location.href = window.location.pathname;
+  // デフォルトのイベントをキャンセルする
+  event.preventDefault();
+
+  const scrollPosition = window.scrollY; // 現在のスクロール位置を取得
+
+  // 現在のURLをURLオブジェクトとして取得
+  const currentUrl = new URL(window.location.href);
+  // URLのクエリパラメータ「search」を空に設定
+  currentUrl.searchParams.set('search', '');
+  // URLのクエリパラメータ「scroll」を設定
+  currentUrl.searchParams.set('scroll', scrollPosition);
+  // 更新されたURLにリダイレクト
+  window.location.href = currentUrl.toString();
 }
+
+// 検索ボタンのクリックイベントを監視し、検索処理を行う
+document.getElementById('searchButton').addEventListener('click', function (event) {
+  event.preventDefault(); // デフォルトの動作をキャンセルする
+
+  const searchInput = document.getElementById('search');
+  const searchValue = searchInput ? searchInput.value : '';
+  const scrollPosition = window.scrollY; // 現在のスクロール位置を取得
+
+  // 現在のURLをURLオブジェクトとして取得
+  const currentUrl = new URL(window.location.href);
+  // URLのクエリパラメータ「search」を設定
+  currentUrl.searchParams.set('search', searchValue);
+  // URLのクエリパラメータ「scroll」を設定
+  currentUrl.searchParams.set('scroll', scrollPosition);
+  // 更新されたURLにリダイレクト
+  window.location.href = currentUrl.toString();
+});
 
 // 昇順ボタンのクリックイベントを監視し、changeOrder関数を呼び出す
 document.getElementById('ascButton').addEventListener('click', function () {
@@ -67,36 +97,6 @@ function changeOrder(order) {
   // 更新されたURLにリダイレクト
   window.location.href = currentUrl.toString();
 }
-
-// ページ読み込み時に実行する処理
-window.addEventListener('load', function () {
-  // URLのクエリパラメータを取得するためのURLSearchParamsオブジェクトを作成
-  const urlParams = new URLSearchParams(window.location.search);
-  // URLのクエリパラメータ「scroll」を取得
-  const scrollPosition = urlParams.get('scroll');
-
-  if (scrollPosition) {
-    window.scrollTo(0, parseInt(scrollPosition)); // スクロール位置を設定
-  }
-});
-
-// 検索押すとトップに移動する 解決できない
-// 検索ボタンのクリックイベントを監視し、changeOrder関数を呼び出す
-document.getElementById('searchButton').addEventListener('click', function () {
-  const searchInput = document.getElementById('search');
-  // 検索キーワードを取得
-  const searchValue = searchInput ? searchInput.value : '';
-  // 現在のスクロール位置を取得
-  const scrollPosition = window.scrollY;
-  // 現在のURLをURLオブジェクトとして取得
-  const currentUrl = new URL(window.location.href);
-  // URLのクエリパラメータ「search」を設定
-  currentUrl.searchParams.set('search', searchValue);
-  // URLのクエリパラメータ「scroll」を設定
-  currentUrl.searchParams.set('scroll', scrollPosition);
-  // 更新されたURLにリダイレクト
-  window.location.href = currentUrl.toString();
-});
 
 // ページ読み込み時に実行する処理
 window.addEventListener('load', function () {

@@ -124,55 +124,28 @@
       $stmt->execute();
       $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  // 連想配列で取得し配列に格納
 
-      // Ajaxリクエストかどうかを確認
-      $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+      // 検索結果の表示
+      foreach ($results as $row) {
+        echo '<div class="border rounded-md p-2 m-2 bg-white flex flex-col">';
+        echo '<p><strong>名前：</strong>' . h($row['name']) . '</p>';
+        echo '<p><strong>内容：</strong>' . nl2br(h($row['message'])) . '</p>';
 
-      if ($isAjax) {
-        // Ajaxリクエストの場合、検索結果のHTMLのみを返す
-        ob_start();
-        foreach ($results as $row) {
-          echo '<div class="border rounded-md p-2 m-2 bg-white flex flex-col">';
-          echo '<p><strong>名前：</strong>' . h($row['name']) . '</p>';
-          echo '<p><strong>内容：</strong>' . nl2br(h($row['message'])) . '</p>';
-          echo '<div class="border rounded-md overflow-hidden w-full h-auto picture-modal-trigger"';
-          if (!empty($row['picture'])) {
-            echo ' data-img-src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '"';
-          }
-          echo '>';
-          if (!empty($row['picture'])) {
-            echo '<img src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '" alt="写真" class="w-full h-auto">';
-          }
-          echo '</div>';
-          echo '<p class="mt-auto"><strong>日付：</strong>' . h($row['date']) . '</p>';
-          echo '</div>';
+        // 写真部分にクラスとデータ属性を設定
+        echo '<div class="border rounded-md overflow-hidden w-full h-auto picture-modal-trigger"';
+        if (!empty($row['picture'])) {
+          echo ' data-img-src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '"'; // モーダルに表示する画像データ
         }
-        $html = ob_get_clean();
-        echo $html;
-        exit;
-      } else {
-        // 検索結果の表示
-        foreach ($results as $row) {
-          echo '<div class="border rounded-md p-2 m-2 bg-white flex flex-col">';
-          echo '<p><strong>名前：</strong>' . h($row['name']) . '</p>';
-          echo '<p><strong>内容：</strong>' . nl2br(h($row['message'])) . '</p>';
+        echo '>';
 
-          // 写真部分にクラスとデータ属性を設定
-          echo '<div class="border rounded-md overflow-hidden w-full h-auto picture-modal-trigger"';
-          if (!empty($row['picture'])) {
-            echo ' data-img-src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '"'; // モーダルに表示する画像データ
-          }
-          echo '>';
-
-          // pictureが空でなければbase64エンコードされた画像データを表示
-          if (!empty($row['picture'])) {
-            echo '<img src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '" alt="写真" class="w-full h-auto">';
-          }
-          echo '</div>';
-
-          echo '<p class="mt-auto"><strong>日付：</strong>' . h($row['date']) . '</p>';
-          echo '</div>';
+        // pictureが空でなければbase64エンコードされた画像データを表示
+        if (!empty($row['picture'])) {
+          echo '<img src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '" alt="写真" class="w-full h-auto">';
         }
+        echo '</div>';
+        echo '<p class="mt-auto"><strong>日付：</strong>' . h($row['date']) . '</p>';
+        echo '</div>';
       }
+
       ?>
     </div>
   </div>
